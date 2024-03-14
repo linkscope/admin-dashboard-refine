@@ -1,48 +1,27 @@
-import {
-  Refine,
-  GitHubBanner,
-  WelcomePage,
-  Authenticated,
-} from "@refinedev/core";
-import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import { Refine, GitHubBanner, WelcomePage, Authenticated } from '@refinedev/core'
+import { DevtoolsPanel, DevtoolsProvider } from '@refinedev/devtools'
+import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar'
 
-import {
-  AuthPage,
-  ErrorComponent,
-  useNotificationProvider,
-  ThemedLayoutV2,
-  ThemedSiderV2,
-} from "@refinedev/antd";
-import "@refinedev/antd/dist/reset.css";
+import { AuthPage, ErrorComponent, useNotificationProvider, ThemedLayoutV2, ThemedSiderV2 } from '@refinedev/antd'
+import '@refinedev/antd/dist/reset.css'
 
-import dataProvider from "@refinedev/simple-rest";
-import { App as AntdApp } from "antd";
-import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
+import dataProvider from '@refinedev/simple-rest'
+import { App as AntdApp } from 'antd'
+import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom'
 import routerBindings, {
   NavigateToResource,
   CatchAllNavigate,
   UnsavedChangesNotifier,
   DocumentTitleHandler,
-} from "@refinedev/react-router-v6";
-import {
-  BlogPostList,
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryList,
-  CategoryCreate,
-  CategoryEdit,
-  CategoryShow,
-} from "./pages/categories";
-import { ColorModeContextProvider } from "./contexts/color-mode";
-import { Header } from "./components/header";
-import { Login } from "./pages/login";
-import { Register } from "./pages/register";
-import { ForgotPassword } from "./pages/forgotPassword";
-import { authProvider } from "./authProvider";
+} from '@refinedev/react-router-v6'
+import { BlogPostList, BlogPostCreate, BlogPostEdit, BlogPostShow } from './pages/blog-posts'
+import { CategoryList, CategoryCreate, CategoryEdit, CategoryShow } from './pages/categories'
+import { ColorModeContextProvider } from './contexts/color-mode'
+import { Header } from './components/header'
+import { Login } from './pages/login'
+import { Register } from './pages/register'
+import { ForgotPassword } from './pages/forgotPassword'
+import { authProvider } from './authProvider'
 
 function App() {
   return (
@@ -53,27 +32,27 @@ function App() {
           <AntdApp>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={dataProvider('https://api.fake-rest.refine.dev')}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerBindings}
                 authProvider={authProvider}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
+                    name: 'blog_posts',
+                    list: '/blog-posts',
+                    create: '/blog-posts/create',
+                    edit: '/blog-posts/edit/:id',
+                    show: '/blog-posts/show/:id',
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
+                    name: 'categories',
+                    list: '/categories',
+                    create: '/categories/create',
+                    edit: '/categories/edit/:id',
+                    show: '/categories/show/:id',
                     meta: {
                       canDelete: true,
                     },
@@ -83,16 +62,13 @@ function App() {
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
                   useNewQueryKeys: true,
-                  projectId: "vEtHhn-bICvK4-4D2FkW",
+                  projectId: 'vEtHhn-bICvK4-4D2FkW',
                 }}
               >
                 <Routes>
                   <Route
                     element={
-                      <Authenticated
-                        key="authenticated-inner"
-                        fallback={<CatchAllNavigate to="/login" />}
-                      >
+                      <Authenticated key="authenticated-inner" fallback={<CatchAllNavigate to="/login" />}>
                         <ThemedLayoutV2
                           Header={() => <Header sticky />}
                           Sider={(props) => <ThemedSiderV2 {...props} fixed />}
@@ -102,10 +78,7 @@ function App() {
                       </Authenticated>
                     }
                   >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
+                    <Route index element={<NavigateToResource resource="blog_posts" />} />
                     <Route path="/blog-posts">
                       <Route index element={<BlogPostList />} />
                       <Route path="create" element={<BlogPostCreate />} />
@@ -122,20 +95,14 @@ function App() {
                   </Route>
                   <Route
                     element={
-                      <Authenticated
-                        key="authenticated-outer"
-                        fallback={<Outlet />}
-                      >
+                      <Authenticated key="authenticated-outer" fallback={<Outlet />}>
                         <NavigateToResource />
                       </Authenticated>
                     }
                   >
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route
-                      path="/forgot-password"
-                      element={<ForgotPassword />}
-                    />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
                   </Route>
                 </Routes>
 
@@ -149,7 +116,7 @@ function App() {
         </ColorModeContextProvider>
       </RefineKbarProvider>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
