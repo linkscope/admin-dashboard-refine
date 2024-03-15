@@ -14,7 +14,7 @@ export const BlogPostCreate = () => {
     <Create saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label={'Title'}
+          label="Title"
           name={['title']}
           rules={[
             {
@@ -25,7 +25,7 @@ export const BlogPostCreate = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label={'Content'}
+          label="Content"
           name="content"
           rules={[
             {
@@ -36,7 +36,7 @@ export const BlogPostCreate = () => {
           <MDEditor data-color-mode="light" />
         </Form.Item>
         <Form.Item
-          label={'Category'}
+          label="Category"
           name={['category', 'id']}
           rules={[
             {
@@ -47,9 +47,9 @@ export const BlogPostCreate = () => {
           <Select {...categorySelectProps} />
         </Form.Item>
         <Form.Item
-          label={'Status'}
+          label="Status"
           name={['status']}
-          initialValue={'draft'}
+          initialValue="draft"
           rules={[
             {
               required: true,
@@ -57,7 +57,7 @@ export const BlogPostCreate = () => {
           ]}
         >
           <Select
-            defaultValue={'draft'}
+            defaultValue="draft"
             options={[
               { value: 'draft', label: 'Draft' },
               { value: 'published', label: 'Published' },
