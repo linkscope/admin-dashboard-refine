@@ -1,13 +1,14 @@
-import { PropsWithChildren, createContext, useEffect, useState } from 'react'
+import type { PropsWithChildren } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { ConfigProvider, theme } from 'antd'
 import { RefineThemes } from '@refinedev/antd'
 
-type ColorModeContextType = {
+interface ColorModeContextType {
   mode: string
   setMode: (mode: string) => void
 }
 
-export const ColorModeContext = createContext<ColorModeContextType>({} as ColorModeContextType)
+export const ColorModeContext = createContext<ColorModeContextType>({} as any)
 
 export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const colorModeFromLocalStorage = localStorage.getItem('colorMode')
@@ -28,15 +29,18 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({ children
     }
   }
 
+  const colorMode = useMemo(
+    () => ({
+      setMode: setColorMode,
+      mode,
+    }),
+    [mode],
+  )
+
   const { darkAlgorithm, defaultAlgorithm } = theme
 
   return (
-    <ColorModeContext.Provider
-      value={{
-        setMode: setColorMode,
-        mode,
-      }}
-    >
+    <ColorModeContext.Provider value={colorMode}>
       <ConfigProvider
         // you can change the theme colors here. example: ...RefineThemes.Magenta,
         theme={{

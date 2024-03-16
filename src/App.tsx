@@ -7,9 +7,11 @@ import '@refinedev/antd/dist/reset.css'
 
 import { App as AntdApp } from 'antd'
 import { BrowserRouter } from 'react-router-dom'
-import routerBindings, { UnsavedChangesNotifier, DocumentTitleHandler } from '@refinedev/react-router-v6'
+import routerProvider, { UnsavedChangesNotifier, DocumentTitleHandler } from '@refinedev/react-router-v6'
 import { useTranslation } from 'react-i18next'
 import { ColorModeContextProvider } from './contexts/color-mode'
+
+import { dataProvider, liveProvider } from './providers'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -26,13 +28,16 @@ function App() {
         <AntdApp>
           <DevtoolsProvider>
             <Refine
+              dataProvider={dataProvider}
+              liveProvider={liveProvider}
               notificationProvider={useNotificationProvider}
-              routerProvider={routerBindings}
+              routerProvider={routerProvider}
               i18nProvider={i18nProvider}
               options={{
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
                 useNewQueryKeys: true,
+                liveMode: 'auto',
               }}
             >
               <AuthPage type="login" registerLink={false} forgotPasswordLink={false} title={<h3>Dashboard Admin</h3>} />
