@@ -74,7 +74,7 @@
   "buttons": {
     "create": "Create",
     "save": "保存",
-    "logout": "Logout",
+    "logout": "登出",
     "delete": "Delete",
     "edit": "Edit",
     "cancel": "Cancel",

@@ -17,9 +17,10 @@ import { useTranslation } from 'react-i18next'
 import { ColorModeContextProvider } from './contexts/color-mode'
 
 import { dataProvider, liveProvider, authProvider } from './providers'
+import resources from './resources'
 
 import Layout from './layout'
-import { Login, Home } from './pages'
+import { Login, Dashboard } from './pages'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -48,6 +49,7 @@ function App() {
                 useNewQueryKeys: true,
                 liveMode: 'auto',
               }}
+              resources={resources}
             >
               <Routes>
                 <Route
@@ -59,7 +61,7 @@ function App() {
                     </Authenticated>
                   }
                 >
-                  <Route index element={<Home />} />
+                  <Route index element={<Dashboard />} />
                 </Route>
                 <Route
                   element={

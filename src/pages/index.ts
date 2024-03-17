@@ -1,4 +1,4 @@
-import Home from './home/home'
-import Login from './login/login'
+import Dashboard from './dashboard'
+import Login from './login'
 
-export { Home, Login }
+export { Dashboard, Login }
