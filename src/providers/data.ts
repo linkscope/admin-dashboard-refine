@@ -50,8 +50,8 @@ export const client = new GraphQLClient(API_URL, {
       const errors = getGraphQLErrors(body)
 
       if (errors) {
-        console.error(errors)
-        throw errors
+        console.error(errors.message)
+        throw errors.message
       }
 
       return response
