@@ -7,6 +7,8 @@ import { TextField } from '@refinedev/antd'
 import { ColorModeContext } from '../../contexts/color-mode'
 import type { User } from '~/graphql/schema.types'
 
+import AccountSettings from './AccountSettings'
+
 const CurrentUser = memo(() => {
   const { data: user } = useGetIdentity<User>()
   const [isOpen, setIsOpen] = useState(false)
@@ -28,22 +30,25 @@ const CurrentUser = memo(() => {
   )
 
   return (
-    <Popover
-      placement="bottomRight"
-      trigger="click"
-      overlayInnerStyle={{ padding: 0 }}
-      overlayStyle={{ zIndex: 999 }}
-      content={content}
-    >
-      <Avatar
-        src={user?.avatarUrl}
-        alt={user?.name}
-        className="flex items-center border-none cursor-pointer"
-        style={{ backgroundColor: '#87d068' }}
+    <>
+      <Popover
+        placement="bottomRight"
+        trigger="click"
+        overlayInnerStyle={{ padding: 0 }}
+        overlayStyle={{ zIndex: 999 }}
+        content={content}
       >
-        {user?.name}
-      </Avatar>
-    </Popover>
+        <Avatar
+          src={user?.avatarUrl}
+          alt={user?.name}
+          className="flex items-center border-none cursor-pointer"
+          style={{ backgroundColor: '#87d068' }}
+        >
+          {user?.name}
+        </Avatar>
+      </Popover>
+      <AccountSettings opened={isOpen} setOpened={setIsOpen} userId={user?.id || ''} />
+    </>
   )
 })
 

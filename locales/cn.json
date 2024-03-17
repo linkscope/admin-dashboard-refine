@@ -73,7 +73,7 @@
   },
   "buttons": {
     "create": "Create",
-    "save": "Save",
+    "save": "保存",
     "logout": "Logout",
     "delete": "Delete",
     "edit": "Edit",
@@ -90,14 +90,14 @@
   },
   "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
   "notifications": {
-    "success": "Successful",
+    "success": "成功",
     "error": "Error (status code: {{statusCode}})",
     "undoable": "You have {{seconds}} seconds to undo",
     "createSuccess": "Successfully created {{resource}}",
     "createError": "There was an error creating {{resource}} (status code: {{statusCode}})",
     "deleteSuccess": "Successfully deleted {{resource}}",
     "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
-    "editSuccess": "Successfully edited {{resource}}",
+    "editSuccess": "编辑成功 数据源：{{resource}}",
     "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
     "importProgress": "Importing: {{processed}}/{{total}}"
   },
