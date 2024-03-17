@@ -2,14 +2,14 @@ import graphQLDataProvider, { GraphQLClient, liveProvider as graphQLiveProvider 
 import type { GraphQLFormattedError } from 'graphql'
 import { createClient } from 'graphql-ws'
 
-export const API_URL = 'https://api.crm.refine.dev'
+export const API_URL = 'https://api.crm.refine.dev/graphql'
 export const WS_URL = 'wss://api.crm.refine.dev/graphql'
 
 const fetcher = async (url: string, options: RequestInit) => {
   const token = localStorage.getItem('access_token')
-  const headers = options.headers as Record<string, string>
+  const headers = (options?.headers as Record<string, string>) || {}
 
-  return await fetch(url, {
+  return fetch(url, {
     ...options,
     headers: {
       ...headers,
@@ -45,7 +45,8 @@ export const client = new GraphQLClient(API_URL, {
   fetch: async (url: string, options: RequestInit) => {
     try {
       const response = await fetcher(url, options)
-      const body = await response.json()
+      const responseClone = response.clone()
+      const body = await responseClone.json()
       const errors = getGraphQLErrors(body)
 
       if (errors) {
@@ -53,7 +54,7 @@ export const client = new GraphQLClient(API_URL, {
         throw errors
       }
 
-      return body
+      return response
     } catch (e) {
       return Promise.reject(new Error(e as string))
     }

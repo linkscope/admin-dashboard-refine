@@ -1,17 +1,24 @@
-import { Refine } from '@refinedev/core'
+import { Refine, WelcomePage, Authenticated } from '@refinedev/core'
 import type { I18nProvider } from '@refinedev/core'
 import { DevtoolsPanel, DevtoolsProvider } from '@refinedev/devtools'
 
-import { useNotificationProvider, AuthPage } from '@refinedev/antd'
+import { useNotificationProvider } from '@refinedev/antd'
 import '@refinedev/antd/dist/reset.css'
 
 import { App as AntdApp } from 'antd'
-import { BrowserRouter } from 'react-router-dom'
-import routerProvider, { UnsavedChangesNotifier, DocumentTitleHandler } from '@refinedev/react-router-v6'
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import routerProvider, {
+  UnsavedChangesNotifier,
+  DocumentTitleHandler,
+  CatchAllNavigate,
+  NavigateToResource,
+} from '@refinedev/react-router-v6'
 import { useTranslation } from 'react-i18next'
 import { ColorModeContextProvider } from './contexts/color-mode'
 
-import { dataProvider, liveProvider } from './providers'
+import { dataProvider, liveProvider, authProvider } from './providers'
+
+import { Login } from './pages/login/login'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -30,6 +37,7 @@ function App() {
             <Refine
               dataProvider={dataProvider}
               liveProvider={liveProvider}
+              authProvider={authProvider}
               notificationProvider={useNotificationProvider}
               routerProvider={routerProvider}
               i18nProvider={i18nProvider}
@@ -40,7 +48,26 @@ function App() {
                 liveMode: 'auto',
               }}
             >
-              <AuthPage type="login" registerLink={false} forgotPasswordLink={false} title={<h3>Dashboard Admin</h3>} />
+              <Routes>
+                <Route
+                  element={
+                    <Authenticated key="authenticated" fallback={<CatchAllNavigate to="/login" />}>
+                      <Outlet />
+                    </Authenticated>
+                  }
+                >
+                  <Route index element={<WelcomePage />} />
+                </Route>
+                <Route
+                  element={
+                    <Authenticated key="unauthenticated" fallback={<Outlet />}>
+                      <NavigateToResource />
+                    </Authenticated>
+                  }
+                >
+                  <Route path="/login" element={<Login />} />
+                </Route>
+              </Routes>
 
               <UnsavedChangesNotifier />
               <DocumentTitleHandler />
