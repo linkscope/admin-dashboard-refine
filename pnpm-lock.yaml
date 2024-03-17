@@ -32,6 +32,9 @@ dependencies:
   antd:
     specifier: ^5.0.5
     version: 5.15.2(react-dom@18.2.0)(react@18.2.0)
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
   graphql:
     specifier: ^16.8.1
     version: 16.8.1

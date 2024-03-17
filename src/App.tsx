@@ -48,6 +48,7 @@ function App() {
                 warnWhenUnsavedChanges: true,
                 useNewQueryKeys: true,
                 liveMode: 'auto',
+                projectId: "7sK9sc-75PrpS-dDdwAH"
               }}
               resources={resources}
             >
@@ -82,7 +83,7 @@ function App() {
         </AntdApp>
       </ColorModeContextProvider>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App
