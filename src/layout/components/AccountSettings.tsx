@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo, useCallback } from 'react'
 import { Drawer, Button, Card, Form, Avatar, Input } from 'antd'
 import { TextField, useForm, SaveButton } from '@refinedev/antd'
 import { CloseOutlined } from '@ant-design/icons'
@@ -21,12 +21,12 @@ const AccountSettings = memo(({ opened, setOpened, userId }: Props) => {
       gqlMutation: UPDATE_USER_MUTATION,
     },
   })
-  const { avatarUrl, name } = queryResult?.data?.data || {}
+  const { avatarUrl, name } = useMemo(() => queryResult?.data?.data || {}, [queryResult?.data?.data])
 
-  const saveAccountInfo = async () => {
+  const saveAccountInfo = useCallback(async () => {
     await saveButtonProps.onClick()
     setOpened(false)
-  }
+  }, [saveButtonProps])
 
   return (
     <Drawer open={opened} width={756} styles={{ header: { display: 'none' } }}>
