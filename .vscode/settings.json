@@ -8,5 +8,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.experimental.useFlatConfig": true // 开启新版本Eslint配置文件
+  "eslint.experimental.useFlatConfig": true,
+  "i18n-ally.localesPaths": [
+    "locales"
+  ] // 开启新版本Eslint配置文件
 }

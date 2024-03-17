@@ -1,4 +1,4 @@
-import { Refine, WelcomePage, Authenticated } from '@refinedev/core'
+import { Refine, Authenticated } from '@refinedev/core'
 import type { I18nProvider } from '@refinedev/core'
 import { DevtoolsPanel, DevtoolsProvider } from '@refinedev/devtools'
 
@@ -18,7 +18,8 @@ import { ColorModeContextProvider } from './contexts/color-mode'
 
 import { dataProvider, liveProvider, authProvider } from './providers'
 
-import { Login } from './pages/login/login'
+import Layout from './layout'
+import { Login, Home } from './pages'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -52,11 +53,13 @@ function App() {
                 <Route
                   element={
                     <Authenticated key="authenticated" fallback={<CatchAllNavigate to="/login" />}>
-                      <Outlet />
+                      <Layout>
+                        <Outlet />
+                      </Layout>
                     </Authenticated>
                   }
                 >
-                  <Route index element={<WelcomePage />} />
+                  <Route index element={<Home />} />
                 </Route>
                 <Route
                   element={
