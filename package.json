@@ -54,7 +54,8 @@
     "build": "tsc && refine build",
     "preview": "refine start",
     "refine": "refine",
-    "preinstall": "graphql-codegen"
+    "preinstall": "graphql-codegen",
+    "lint": "prettier ./src --write"
   },
   "browserslist": {
     "production": [
