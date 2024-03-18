@@ -55,7 +55,11 @@ function App() {
               <Routes>
                 <Route
                   element={
-                    <Authenticated key="authenticated" fallback={<CatchAllNavigate to="/login" />}>
+                    <Authenticated
+                      key="authenticated"
+                      fallback={<CatchAllNavigate to="/login" />}
+                      v3LegacyAuthProviderCompatible
+                    >
                       <Layout>
                         <Outlet />
                       </Layout>

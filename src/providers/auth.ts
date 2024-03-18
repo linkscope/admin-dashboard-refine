@@ -2,29 +2,28 @@ import type { AuthProvider } from '@refinedev/core'
 import { API_URL, dataProvider } from './data'
 
 export const authProvider: AuthProvider = {
-  login: async () => {
+  login: async ({ email, password }) => {
     try {
-      // const { data } = await dataProvider.custom({
-      //   url: API_URL,
-      //   method: 'post',
-      //   meta: {
-      //     variables: {
-      //       email,
-      //       password,
-      //     },
-      //     rawQuery: `
-      //       mutation Login($email: String!) {
-      //         login(loginInput: { email: $email }) {
-      //           accessToken
-      //         }
-      //       }
-      //     `,
-      //   },
-      // })
-      localStorage.setItem(
-        'access_token',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibWljaGFlbC5zY290dEBkdW5kZXJtaWZmbGluLmNvbSIsImlhdCI6MTcxMDY1NzE2MiwiZXhwIjoxNzEwOTE2MzYyfQ.PpLzxWPb51Z_Eeg5cv1VquJLbiSJ6z2qHNinPkLUeBQ',
-      )
+      const { data } = await dataProvider.custom({
+        url: API_URL,
+        method: 'post',
+        meta: {
+          variables: {
+            email,
+            password,
+          },
+          rawQuery: `
+            mutation Login($email: String!) {
+              login(loginInput: { email: $email }) {
+                accessToken
+              }
+            }
+          `,
+        },
+      })
+
+      // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoibWljaGFlbC5zY290dEBkdW5kZXJtaWZmbGluLmNvbSIsImlhdCI6MTcxMDY1NzE2MiwiZXhwIjoxNzEwOTE2MzYyfQ.PpLzxWPb51Z_Eeg5cv1VquJLbiSJ6z2qHNinPkLUeBQ'
+      localStorage.setItem('access_token', data.login.accessToken)
 
       return { success: true, redirectTo: '/' }
     } catch (e: any) {

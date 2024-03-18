@@ -4,7 +4,7 @@ import { Row, Col } from 'antd'
 import { DASHBOARD_TOTAL_COUNTS_QUERY } from '~/graphql/queries'
 import type { DashboardTotalCountsQuery } from '~/graphql/types'
 
-import { Agenda, DealsChart, TotalCountCard } from './components'
+import { Agenda, DealsChart, TotalCountCard, LatestActivities } from './components'
 
 const Dashboard = () => {
   const { data, isLoading } = useCustom<DashboardTotalCountsQuery>({
@@ -38,6 +38,11 @@ const Dashboard = () => {
         </Col>
         <Col xs={24} sm={24} xl={16} className="h-120">
           <DealsChart />
+        </Col>
+      </Row>
+      <Row gutter={[32, 32]} className="mt-8">
+        <Col xs={24}>
+          <LatestActivities />
         </Col>
       </Row>
     </div>
