@@ -68,7 +68,7 @@
   "actions": {
     "list": "List",
     "create": "Create",
-    "edit": "Edit",
+    "edit": "编辑",
     "show": "Show"
   },
   "buttons": {
@@ -81,7 +81,7 @@
     "confirm": "你确认吗?",
     "filter": "筛选",
     "clear": "清除",
-    "refresh": "Refresh",
+    "refresh": "刷新",
     "show": "Show",
     "undo": "Undo",
     "import": "Import",
@@ -108,7 +108,7 @@
   "dashboard": {
     "title": "Dashboard"
   },
-  "posts": {
+  "companies": {
     "posts": "Posts",
     "fields": {
       "id": "Id",
@@ -125,8 +125,8 @@
     },
     "titles": {
       "create": "Create Post",
-      "edit": "Edit Post",
-      "list": "Posts",
+      "edit": "编辑公司",
+      "list": "公司列表",
       "show": "Show Post"
     }
   },
@@ -136,11 +136,11 @@
   "documentTitle": {
     "default": "refine",
     "suffix": " | Refine",
-    "post": {
-      "list": "Posts | Refine",
+    "companies": {
+      "list": "公司 | Refine",
       "show": "#{{id}} Show Post | Refine",
-      "edit": "#{{id}} Edit Post | Refine",
-      "create": "Create new Post | Refine",
+      "edit": "#{{id}} 编辑公司 | Refine",
+      "create": "创建公司 | Refine",
       "clone": "#{{id}} Clone Post | Refine"
     }
   },
