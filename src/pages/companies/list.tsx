@@ -1,5 +1,6 @@
 import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, TextField, useTable } from '@refinedev/antd'
 import { getDefaultFilter, useGo } from '@refinedev/core'
+import type { PropsWithChildren } from 'react'
 import { useMemo } from 'react'
 import { COMPANIES_LIST_QUERY } from '~/graphql/queries'
 import { Table, Input, Space, Avatar } from 'antd'
@@ -15,7 +16,7 @@ const renderFilterDropdown = (props: FilterDropdownProps) => {
 	)
 }
 
-const CompaniesList = () => {
+const CompaniesList = ({ children }: PropsWithChildren) => {
 	const go = useGo()
 	const { tableProps, filters } = useTable({
 		resource: 'companies',
@@ -72,47 +73,51 @@ const CompaniesList = () => {
 	)
 
 	return (
-		<List headerButtons={headerButtons}>
-			<Table {...tableProps} pagination={{ ...tableProps.pagination }} rowKey="id">
-				<Table.Column<Company>
-					dataIndex="name"
-					title="公司名称"
-					defaultFilteredValue={getDefaultFilter('id', filters)}
-					filterIcon={<SearchOutlined />}
-					filterDropdown={renderFilterDropdown}
-					render={(_, record) => (
-						<Space>
-							<Avatar shape="square" src={record.avatarUrl}>
-								{record.name}
-							</Avatar>
-							<TextField value={record.name} />
-						</Space>
-					)}
-				/>
-				<Table.Column<Company>
-					dataIndex="totalRevenue"
-					title="总收入"
-					render={(_, record) => (
-						<TextField
-							value={Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'USD' }).format(
-								record?.dealsAggregate?.[0]?.sum?.value || 0,
-							)}
-						/>
-					)}
-				/>
-				<Table.Column<Company>
-					dataIndex="id"
-					title="操作"
-					fixed="right"
-					render={(value) => (
-						<Space>
-							<EditButton size="small" recordItemId={value} />
-							<DeleteButton size="small" recordItemId={value} />
-						</Space>
-					)}
-				/>
-			</Table>
-		</List>
+		<>
+			<List headerButtons={headerButtons}>
+				<Table {...tableProps} pagination={{ ...tableProps.pagination }} rowKey="id">
+					<Table.Column<Company>
+						dataIndex="name"
+						title="公司名称"
+						defaultFilteredValue={getDefaultFilter('id', filters)}
+						filterIcon={<SearchOutlined />}
+						filterDropdown={renderFilterDropdown}
+						render={(_, record) => (
+							<Space>
+								<Avatar shape="square" src={record.avatarUrl}>
+									{record.name}
+								</Avatar>
+								<TextField value={record.name} />
+							</Space>
+						)}
+					/>
+					<Table.Column<Company>
+						dataIndex="totalRevenue"
+						title="总收入"
+						render={(_, record) => (
+							<TextField
+								value={Intl.NumberFormat('zh-CN', { style: 'currency', currency: 'USD' }).format(
+									record?.dealsAggregate?.[0]?.sum?.value || 0,
+								)}
+							/>
+						)}
+					/>
+					<Table.Column<Company>
+						dataIndex="id"
+						title="操作"
+						fixed="right"
+						width={200}
+						render={(value) => (
+							<Space>
+								<EditButton size="small" recordItemId={value} />
+								<DeleteButton size="small" recordItemId={value} />
+							</Space>
+						)}
+					/>
+				</Table>
+			</List>
+			{children}
+		</>
 	)
 }
 

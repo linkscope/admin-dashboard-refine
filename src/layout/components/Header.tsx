@@ -60,7 +60,7 @@ const Header = () => {
 
 	return (
 		<Layout.Header
-			className="sticky top-0 z-1 flex items-center justify-end"
+			className="sticky top-0 z-999 flex items-center justify-end"
 			style={{ backgroundColor: token.colorBgElevated }}
 		>
 			<Space>
