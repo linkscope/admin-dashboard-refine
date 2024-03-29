@@ -54,7 +54,7 @@
     "preview": "refine start",
     "refine": "refine",
     "preinstall": "graphql-codegen",
-    "lint": "prettier ./src --write"
+    "lint": "prettier . --write"
   },
   "browserslist": {
     "production": [

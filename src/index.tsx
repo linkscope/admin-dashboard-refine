@@ -10,9 +10,9 @@ const container = document.getElementById('root') as HTMLElement
 const root = createRoot(container)
 
 root.render(
-	<React.StrictMode>
-		<React.Suspense fallback="加载中">
-			<App />
-		</React.Suspense>
-	</React.StrictMode>,
+  <React.StrictMode>
+    <React.Suspense fallback="加载中">
+      <App />
+    </React.Suspense>
+  </React.StrictMode>,
 )

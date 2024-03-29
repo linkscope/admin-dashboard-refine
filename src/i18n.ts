@@ -7,15 +7,16 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 dayjs.locale('zh-cn')
 
-i18n.use(Backend)
-	.use(detector)
-	.use(initReactI18next)
-	.init({
-		supportedLngs: ['cn'],
-		backend: {
-			loadPath: '/locales/{{lng}}.json', // locale files path
-		},
-		fallbackLng: ['cn'],
-	})
+i18n
+  .use(Backend)
+  .use(detector)
+  .use(initReactI18next)
+  .init({
+    supportedLngs: ['cn'],
+    backend: {
+      loadPath: '/locales/{{lng}}.json', // locale files path
+    },
+    fallbackLng: ['cn'],
+  })
 
 export default i18n

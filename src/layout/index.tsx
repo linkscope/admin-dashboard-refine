@@ -3,20 +3,20 @@ import type { RefineLayoutThemedTitleProps, RefineLayoutSiderProps } from '@refi
 import Header from './components/Header'
 
 const Title = (props: RefineLayoutThemedTitleProps) => {
-	return <ThemedTitleV2 {...props} text="Refine" />
+  return <ThemedTitleV2 {...props} text="Refine" />
 }
 
 const Sider = (props: RefineLayoutSiderProps) => {
-	return <ThemedSiderV2 {...props} fixed />
+  return <ThemedSiderV2 {...props} fixed />
 }
 
 const Layout = ({ children }: React.PropsWithChildren) => {
-	return (
-		// eslint-disable-next-line react/no-unstable-nested-components
-		<ThemedLayoutV2 Header={Header} Title={Title} Sider={Sider}>
-			{children}
-		</ThemedLayoutV2>
-	)
+  return (
+    // eslint-disable-next-line react/no-unstable-nested-components
+    <ThemedLayoutV2 Header={Header} Title={Title} Sider={Sider}>
+      {children}
+    </ThemedLayoutV2>
+  )
 }
 
 export default Layout
