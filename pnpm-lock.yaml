@@ -20,9 +20,6 @@ dependencies:
   '@refinedev/core':
     specifier: ^4.47.1
     version: 4.48.0(@tanstack/react-query@4.36.1)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
-  '@refinedev/devtools':
-    specifier: ^1.1.32
-    version: 1.1.35(@refinedev/cli@2.16.27)(@refinedev/core@4.48.0)(@refinedev/devtools-server@1.1.25)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
   '@refinedev/nestjs-query':
     specifier: ^1.1.2
     version: 1.1.2(@refinedev/core@4.48.0)(gql-query-builder@3.8.0)(graphql-request@5.2.0)(graphql-tag@2.12.6)(graphql-ws@5.15.0)
@@ -140,14 +137,6 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /@aliemir/dom-to-fiber-utils@0.4.0:
-    resolution: {integrity: sha512-QxJLBDQG4tMTv56yvAHeUdRVoocTYGUqyVHqUsATT7TMCgFj1JRcbzzUbdiwwIJ1d5loDUK5PesyKG2RY7t0iQ==}
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-reconciler: 0.29.0(react@18.2.0)
-    dev: false
 
   /@ampproject/remapping@2.3.0:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -3721,34 +3710,6 @@ packages:
     transitivePeerDependencies:
       - debug
       - encoding
-      - react-native
-    dev: false
-
-  /@refinedev/devtools@1.1.35(@refinedev/cli@2.16.27)(@refinedev/core@4.48.0)(@refinedev/devtools-server@1.1.25)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-jCyiADzrv6T+uJTUhf7sZ3ZoLZl2DhALUYRTTQs1pNnd/PpEQuYORCfTyjLqUjQSOi9yXdkGJUN/gpuIuHVD7g==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      '@refinedev/cli': 2.16.27
-      '@refinedev/core': ^4.46.1
-      '@refinedev/devtools-server': 1.1.25
-      '@types/react': ^17.0.0 || ^18.0.0
-      '@types/react-dom': ^17.0.0 || ^18.0.0
-      react: ^17.0.0 || ^18.0.0
-      react-dom: ^17.0.0 || ^18.0.0
-    dependencies:
-      '@aliemir/dom-to-fiber-utils': 0.4.0
-      '@refinedev/cli': 2.16.27(@babel/preset-env@7.24.1)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
-      '@refinedev/core': 4.48.0(@tanstack/react-query@4.36.1)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
-      '@refinedev/devtools-server': 1.1.25(@babel/preset-env@7.24.1)(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
-      '@refinedev/devtools-shared': 1.1.4(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0)(react@18.2.0)
-      '@types/react': 18.2.66
-      '@types/react-dom': 18.2.22
-      error-stack-parser: 2.1.4
-      lodash: 4.17.21
-      lodash-es: 4.17.21
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    transitivePeerDependencies:
       - react-native
     dev: false
 
@@ -10289,17 +10250,6 @@ packages:
       vfile: 5.3.7
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /react-reconciler@0.29.0(react@18.2.0):
-    resolution: {integrity: sha512-wa0fGj7Zht1EYMRhKWwoo1H9GApxYLBuhoAuXN0TlltESAjDssB+Apf0T/DngVqaMyPypDmabL37vw/2aRM98Q==}
-    engines: {node: '>=0.10.0'}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      loose-envify: 1.4.0
-      react: 18.2.0
-      scheduler: 0.23.0
     dev: false
 
   /react-refresh@0.14.0:
