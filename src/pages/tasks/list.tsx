@@ -4,7 +4,7 @@ import KanbanItem from './components/KanbanItem'
 import ProjectCard, { ProjectCardSkeleton } from './components/ProjectCard'
 import KanbanAddCardBtn from './components/KanbanAddCardBtn'
 
-import { useList, useUpdate } from '@refinedev/core'
+import { useList, useNavigation, useUpdate } from '@refinedev/core'
 import { TASK_STAGES_QUERY, TASKS_QUERY } from '~/graphql/queries'
 import type { PropsWithChildren } from 'react'
 import { useMemo } from 'react'
@@ -37,6 +37,8 @@ const TasksSkeleton = () => {
 }
 
 const TasksList = ({ children }: PropsWithChildren) => {
+  const { replace } = useNavigation()
+
   const { data: stages, isLoading: isStagesLoading } = useList<TaskStage>({
     resource: 'taskStages',
     filters: [
@@ -97,7 +99,10 @@ const TasksList = ({ children }: PropsWithChildren) => {
     }
   }, [stages, tasks])
 
-  const handleAddCard = (stageId: string) => {}
+  const handleAddCard = (stageId: string) => {
+    const path = stageId === 'unsigned' ? '/tasks/create' : `/tasks/create?stageId=${stageId}`
+    replace(path)
+  }
 
   const handleOnDragEnd = (event: DragEndEvent) => {
     let stageId = event.over?.id as undefined | null | string
@@ -141,7 +146,6 @@ const TasksList = ({ children }: PropsWithChildren) => {
               id="unsigned"
               title="未分配"
               count={taskStage.unsignedStage.length || 0}
-              description="描述"
               onAddClick={() => handleAddCard('unsigned')}
             >
               {taskStage.unsignedStage.map((task) => (

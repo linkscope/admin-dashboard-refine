@@ -8,6 +8,7 @@ import { memo, useMemo } from 'react'
 import Icon, { ClockCircleOutlined, DeleteOutlined, EyeOutlined, MoreOutlined } from '@ant-design/icons'
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon'
 import dayjs from 'dayjs'
+import { useDelete, useNavigation } from '@refinedev/core'
 
 interface Props {
   id: string
@@ -70,6 +71,8 @@ export const ProjectCardSkeleton = () => {
 const ProjectCard = memo(
   ({ id, title, dueDate, users }: Props) => {
     const { token } = theme.useToken()
+    const { edit } = useNavigation()
+    const { mutate: deleteTask } = useDelete()
 
     const dropdownItems = useMemo(() => {
       const dropdownItems: MenuProps['items'] = [
@@ -77,12 +80,21 @@ const ProjectCard = memo(
           label: '查看卡片',
           key: '0',
           icon: <EyeOutlined />,
+          onClick: () => edit('tasks', id, 'replace'),
         },
         {
           danger: true,
           label: '删除卡片',
           key: '1',
           icon: <DeleteOutlined />,
+          onClick: () =>
+            deleteTask({
+              resource: 'tasks',
+              id,
+              meta: {
+                operation: 'task',
+              },
+            }),
         },
       ]
 
@@ -118,12 +130,7 @@ const ProjectCard = memo(
           size="small"
           title={<TextField ellipsis={{ tooltip: title }} value={title} />}
           extra={
-            <Dropdown
-              trigger={['click']}
-              menu={{ items: dropdownItems }}
-              placement="bottom"
-              arrow={{ pointAtCenter: true }}
-            >
+            <Dropdown menu={{ items: dropdownItems }} placement="bottom" arrow={{ pointAtCenter: true }}>
               <Button
                 type="text"
                 shape="circle"

@@ -19,7 +19,17 @@ import { dataProvider, liveProvider, authProvider } from './providers'
 import resources from './resources'
 
 import Layout from './layout'
-import { Login, Dashboard, CompaniesShow, CompaniesEdit, CompaniesList, CompaniesCreate, TasksList } from './pages'
+import {
+  Login,
+  Dashboard,
+  CompaniesShow,
+  CompaniesEdit,
+  CompaniesList,
+  CompaniesCreate,
+  TasksList,
+  TasksCreate,
+  TasksEdit,
+} from './pages'
 
 function App() {
   const { t, i18n } = useTranslation()
@@ -73,6 +83,8 @@ function App() {
                 </Route>
                 <Route path="/tasks">
                   <Route index element={<TasksList />} />
+                  <Route path="create" element={<TasksCreate />} />
+                  <Route path="edit/:id" element={<TasksEdit />} />
                 </Route>
               </Route>
               <Route
