@@ -50,12 +50,6 @@ dependencies:
   i18next:
     specifier: ^23.10.1
     version: 23.10.1
-  i18next-browser-languagedetector:
-    specifier: ^7.2.0
-    version: 7.2.0
-  i18next-http-backend:
-    specifier: ^2.5.0
-    version: 2.5.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -5627,14 +5621,6 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /cross-fetch@4.0.0:
-    resolution: {integrity: sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==}
-    dependencies:
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
   /cross-inspect@1.0.0:
     resolution: {integrity: sha512-4PFfn4b5ZN6FMNGSZlyb7wUhuN8wvj8t/VQHZdM4JsDcruGJ8L2kf9zao98QIrBPFCpdk27qst/AGTl7pL3ypQ==}
     engines: {node: '>=16.0.0'}
@@ -7309,20 +7295,6 @@ packages:
   /human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
-
-  /i18next-browser-languagedetector@7.2.0:
-    resolution: {integrity: sha512-U00DbDtFIYD3wkWsr2aVGfXGAj2TgnELzOX9qv8bT0aJtvPV9CRO77h+vgmHFBMe7LAxdwvT/7VkCWGya6L3tA==}
-    dependencies:
-      '@babel/runtime': 7.24.0
-    dev: false
-
-  /i18next-http-backend@2.5.0:
-    resolution: {integrity: sha512-Z/aQsGZk1gSxt2/DztXk92DuDD20J+rNudT7ZCdTrNOiK8uQppfvdjq9+DFQfpAnFPn3VZS+KQIr1S/W1KxhpQ==}
-    dependencies:
-      cross-fetch: 4.0.0
-    transitivePeerDependencies:
-      - encoding
-    dev: false
 
   /i18next@23.10.1:
     resolution: {integrity: sha512-NDiIzFbcs3O9PXpfhkjyf7WdqFn5Vq6mhzhtkXzj51aOcNuPNcTwuYNuXCpHsanZGHlHKL35G7huoFeVic1hng==}
