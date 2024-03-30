@@ -105,24 +105,7 @@
   "tags": {
     "clone": "Clone"
   },
-  "dashboard": {
-    "title": "Dashboard"
-  },
   "companies": {
-    "posts": "Posts",
-    "fields": {
-      "id": "Id",
-      "title": "Title",
-      "category": "Category",
-      "status": {
-        "title": "Status",
-        "published": "Published",
-        "draft": "Draft",
-        "rejected": "Rejected"
-      },
-      "content": "Content",
-      "createdAt": "Created At"
-    },
     "titles": {
       "create": "Create Post",
       "edit": "编辑公司",
