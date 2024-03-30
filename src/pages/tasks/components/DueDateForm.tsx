@@ -68,7 +68,6 @@ const DueDateForm = memo(({ initialValues, cancelForm }: Props) => {
           <DatePicker
             format="YYYY-MM-DD HH:mm"
             showTime={{
-              showSecond: false,
               format: 'HH:mm',
             }}
             className="bg-white"

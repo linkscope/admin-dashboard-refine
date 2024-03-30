@@ -3,6 +3,7 @@ import type { I18nProvider } from '@refinedev/core'
 
 import { useNotificationProvider } from '@refinedev/antd'
 import '@refinedev/antd/dist/reset.css'
+import './i18n'
 
 import { App as AntdApp } from 'antd'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'

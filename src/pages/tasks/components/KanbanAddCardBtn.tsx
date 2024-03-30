@@ -12,7 +12,7 @@ const KanbanAddCardBtn = memo(
     onClick: () => void
   }>) => {
     return (
-      <Button size="large" icon={<PlusSquareOutlined />} className="m-4 bg-white" onClick={onClick}>
+      <Button size="large" icon={<PlusSquareOutlined />} className="m-4" onClick={onClick}>
         {children ?? <TextField className="text-md" type="secondary" value="添加新任务" />}
       </Button>
     )
