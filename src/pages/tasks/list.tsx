@@ -4,12 +4,15 @@ import KanbanItem from './components/KanbanItem'
 import ProjectCard, { ProjectCardSkeleton } from './components/ProjectCard'
 import KanbanAddCardBtn from './components/KanbanAddCardBtn'
 
-import { useList } from '@refinedev/core'
+import { useList, useUpdate } from '@refinedev/core'
 import { TASK_STAGES_QUERY, TASKS_QUERY } from '~/graphql/queries'
+import type { PropsWithChildren } from 'react'
 import { useMemo } from 'react'
 import type { TaskStage } from '~/graphql/schema.types'
 import type { GetFieldsFromList } from '@refinedev/nestjs-query'
 import type { TasksQuery } from '~/graphql/types'
+import type { DragEndEvent } from '@dnd-kit/core'
+import { UPDATE_TASK_STAGE_MUTATION } from '~/graphql/mutations'
 
 const TasksSkeleton = () => {
   return (
@@ -33,7 +36,7 @@ const TasksSkeleton = () => {
   )
 }
 
-const TasksList = () => {
+const TasksList = ({ children }: PropsWithChildren) => {
   const { data: stages, isLoading: isStagesLoading } = useList<TaskStage>({
     resource: 'taskStages',
     filters: [
@@ -71,6 +74,7 @@ const TasksList = () => {
       gqlQuery: TASKS_QUERY,
     },
   })
+  const { mutate: updateTask } = useUpdate()
 
   const taskStage = useMemo(() => {
     if (!tasks?.data || !stages?.data) {
@@ -95,52 +99,82 @@ const TasksList = () => {
 
   const handleAddCard = (stageId: string) => {}
 
+  const handleOnDragEnd = (event: DragEndEvent) => {
+    let stageId = event.over?.id as undefined | null | string
+    const taskId = event.active.id as string
+    const taskStageId = event.active.data.current?.stageId
+
+    if (stageId === taskStageId) return
+
+    if (stageId === 'unsigned') {
+      stageId = null
+    }
+
+    updateTask({
+      resource: 'tasks',
+      id: taskId,
+      values: {
+        stageId: stageId,
+      },
+      successNotification: false,
+      mutationMode: 'optimistic',
+      meta: {
+        gqlMutation: UPDATE_TASK_STAGE_MUTATION,
+      },
+    })
+  }
+
   if (isStagesLoading || isTasksLoading) return <TasksSkeleton />
 
   return (
-    <div
-      className="-m-8"
-      style={{
-        width: 'calc(100% + 4rem)',
-        height: 'calc(100vh - 64px)',
-      }}
-    >
-      <div className="w-full h-full flex p-8 overflow-scroll">
-        <KanbanBoard>
-          <KanbanColumn
-            id="unsigned"
-            title="未分配"
-            count={taskStage.unsignedStage.length || 0}
-            description="描述"
-            onAddClick={() => handleAddCard('unsigned')}
-          >
-            {taskStage.unsignedStage.map((task) => (
-              <KanbanItem key={task.id} id={task.id} data={{ ...task, stageId: 'unsigned' }}>
-                <ProjectCard {...task} dueDate={task.dueDate || undefined} />
-              </KanbanItem>
-            ))}
-
-            {!taskStage.unsignedStage.length && <KanbanAddCardBtn onClick={() => handleAddCard('unsigned')} />}
-          </KanbanColumn>
-
-          {taskStage.columns?.map((column) => (
+    <>
+      <div
+        className="-m-8"
+        style={{
+          width: 'calc(100% + 4rem)',
+          height: 'calc(100vh - 64px)',
+        }}
+      >
+        <div className="w-full h-full flex p-8 overflow-scroll">
+          <KanbanBoard onDragEnd={handleOnDragEnd}>
             <KanbanColumn
-              key={column.id}
-              title={column.title}
-              count={column.tasks.length}
-              id={column.id}
-              onAddClick={() => handleAddCard(column.id)}
+              id="unsigned"
+              title="未分配"
+              count={taskStage.unsignedStage.length || 0}
+              description="描述"
+              onAddClick={() => handleAddCard('unsigned')}
             >
-              {column.tasks.map((task) => (
-                <KanbanItem key={task.id} id={task.id} data={task}>
+              {taskStage.unsignedStage.map((task) => (
+                <KanbanItem key={task.id} id={task.id} data={{ ...task, stageId: 'unsigned' }}>
                   <ProjectCard {...task} dueDate={task.dueDate || undefined} />
                 </KanbanItem>
               ))}
+
+              {!taskStage.unsignedStage.length && <KanbanAddCardBtn onClick={() => handleAddCard('unsigned')} />}
             </KanbanColumn>
-          ))}
-        </KanbanBoard>
+
+            {taskStage.columns?.map((column) => (
+              <KanbanColumn
+                key={column.id}
+                title={column.title}
+                count={column.tasks.length}
+                id={column.id}
+                onAddClick={() => handleAddCard(column.id)}
+              >
+                {column.tasks.map((task) => (
+                  <KanbanItem key={task.id} id={task.id} data={task}>
+                    <ProjectCard {...task} dueDate={task.dueDate || undefined} />
+                  </KanbanItem>
+                ))}
+
+                {!column.tasks.length && <KanbanAddCardBtn onClick={() => handleAddCard(column.id)} />}
+              </KanbanColumn>
+            ))}
+          </KanbanBoard>
+        </div>
       </div>
-    </div>
+      {children}
+    </>
   )
 }
 

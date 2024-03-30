@@ -18,7 +18,7 @@ interface Props {
     name: string
     avatarUrl?: User['avatarUrl']
   }[]
-  updatedAt: number
+  updatedAt: string
 }
 
 const TextIconSvg = memo((props: Partial<CustomIconComponentProps>) => {

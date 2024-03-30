@@ -53,7 +53,7 @@ const KanbanColumn = memo(({ children, title, count, description, id, data, onAd
       <div
         className="flex-1 border-2 border-dashed border-transparent rounded"
         style={{
-          overflowY: active ? 'unset' : 'scroll',
+          overflowY: active ? 'unset' : 'auto',
           borderColor: isOver ? '#000040' : 'transparent',
         }}
       >
