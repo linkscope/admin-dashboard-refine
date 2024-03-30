@@ -9,6 +9,7 @@ import Icon, { ClockCircleOutlined, DeleteOutlined, EyeOutlined, MoreOutlined } 
 import type { CustomIconComponentProps } from '@ant-design/icons/lib/components/Icon'
 import dayjs from 'dayjs'
 import { useDelete, useNavigation } from '@refinedev/core'
+import getDateColor from '~/utilities/getDateColor'
 
 interface Props {
   id: string
@@ -104,21 +105,9 @@ const ProjectCard = memo(
     const dueDateOptions = useMemo(() => {
       if (!dueDate) return null
 
-      const date = dayjs(dueDate)
-      const today = dayjs()
-
-      let color = 'default'
-      if (date.isBefore(today)) {
-        color = 'error'
-      }
-
-      if (date.isBefore(today.add(3, 'day'))) {
-        color = 'warning'
-      }
-
       return {
-        color,
-        text: date.format('MMM DD'),
+        color: getDateColor(dueDate),
+        text: dayjs(dueDate).format('MMM DD'),
       }
     }, [dueDate])
 
